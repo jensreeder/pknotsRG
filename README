@@ -1,0 +1,122 @@
+	--------   pknotsRG   -------
+ 
+Folding canonical RNA secondary structures including pseudoknots
+----------------------------------------------------------------
+Robert Giegerich      (robert@techfak.uni-bielefeld.de)
+Jens Reeder	      (jreeder@techfak.uni-bielefeld.de)	
+
+Practical Computer Science
+Faculty of Technology
+University of Bielefeld
+----------------------------------------------------------------
+
+pknotsRG is a tool for thermodynamic folding of RNA secondary
+structures, including the class of canonical simple recursive
+pseudoknots. This class and the algorithms are described in detail
+in:
+
+"Design, Implementation and Evaluation of a Practical Pseudoknot 
+Folding Algorithm based on Thermodynamics",
+Jens Reeder and Robert Giegerich,
+BMC Bioinformatics 2004.
+
+----------------------------------------------------------------
+
+Files:  Algebras.lhs
+	Energy.lhs
+	Foldingspace.lhs
+	RNACombinators.lhs
+	Intloop.lhs
+	Intloop21.lhs
+	Intloop22.lhs
+	pknotsRG-mfe.lhs
+	pknotsRG-enf.lhs
+	pknotsRG-loc.lhs
+	ADPfold.lhs 	(an RNAfold clone using ADP)
+	
+Building:
+	We compile the files with ghc using make (see makefile for details). First try
+	
+		make
+		
+	If this doesn't work, you have to run ghc by yourself:		
+
+		ghc --make -O2 pknotsRG-mfe.lhs
+	
+----------------------------------------------------------------
+
+Currently there are three different version available:
+
+	pknotsRG-mfe:  	computes the best structure (i.e. the
+			structure with minimum free energy).
+	pknotsRG-enf:  	computes the best structure that actually
+			contains at least one pseudoknot.
+	pknotsRG-loc:   computes the best "compact" pseudoknot,
+			i.e. the structure with the lowest energy
+			to length ratio.
+
+
+Usage: 
+		pknotsRG-mfe ucaaguauuccgaagcucaacgggaaaaugagcua
+        or
+		pknotsRG-mfe AUCUGUCAUCUAUUGCUAUCU
+
+	For the other variants substitute mfe with enf or loc.
+	Optional the size of the pseudoknot can be restricted.
+	This accelerates the computation substantially. We used 
+	this parameter to search for pseudoknots of maxsize 100
+	within sequences of length 1000.
+	
+		pknotsRG-mfe sequence optional_maxsize
+
+
+	Note: All non ACGTU characters are internally mapped to N
+	      and are disallowed in any basepairings.
+
+
+
+Output:
+	The output consist of the input sequence, the secondary
+	structure, ad the minimum free energy.
+	Basepairs of the first pseudoknot helix are denoted by
+	'{' and '}', the second helix by '[' and ']' . Basepairs
+	not involved in a pseudoknot correspond to normal brackets,
+	 '(' and ')'.
+
+	Example:
+	
+		UCAAGUAUUCCGAAGCUCAACGGGAAAAUGAGCUA
+		.......[[[[[.{{{{{{.]]]]]...}}}}}}. ( -14.9)
+	
+	Since pknotsRG-loc finds the best local pseudoknot, the
+	output of this variant contains also the start and end position
+	of the corresponding subsequence
+
+		7........................34
+		UUCCGAAGCUCAACGGGAAAAUGAGCU
+		[[[[[.{{{{{{.]]]]]...}}}}}} (-14.51)
+
+
+	
+-----------------------------------------------------------------
+
+The energy model we use for pseudoknots:
+
+Destabilizing:
+	creating a new pseudoknot :		9.0
+	basepair inside pseudoknot:	        0.0
+	not paired base in pk     :		0.3
+
+Stabilizing:
+	stacking of basepairs     :     	stack
+	base dangling of a pk pair:     	dangle
+	coaxial stacking          :     	stack
+
+all values in (kcal/mol)
+
+
+stack and dangle are the energies for nested structures like in
+mfold-3.1. If any nested or unnested structures occur inside a
+pseudoknot, their energy, of course, contributes to the overall
+pseudoknot energy.
+

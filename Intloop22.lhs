@@ -9,7 +9,7 @@
 > module Intloop22 where
 
 > import Foldingspace
-> import Array
+> import Data.Array
 > import Intloop
 
 > il22_energy:: RNAInput -> Int -> Int -> Int

@@ -1,5 +1,5 @@
 
-OPTIONS=  -fvia-C  -O2 -fglasgow-exts -funbox-strict-fields
+OPTIONS= -O2 -funbox-strict-fields
 
 all: pknotsRG-mfe pknotsRG-enf pknotsRG-loc ADPfold
 

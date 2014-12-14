@@ -11,7 +11,7 @@
 > module Intloop where
 
 > import Foldingspace
-> import Array
+> import Data.Array
 
 Data arrangement: internal loop formed by b,e framed by pairs (a,f) and (c,d)
 

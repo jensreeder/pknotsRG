@@ -9,7 +9,7 @@
 
 
 > module Energy where
-> import Array
+> import Data.Array
 > import Numeric
 > import Foldingspace
 > import RNACombinators

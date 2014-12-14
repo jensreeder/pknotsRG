@@ -16,7 +16,7 @@
 
 
 > module RNACombinators where
-> import Array
+> import Data.Array
 
 1. Precedence of the combinators and infix declaration
 ------------------------------------------------------

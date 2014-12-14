@@ -13,7 +13,7 @@
 
 
 > module Foldingspace where
-> import Array
+> import Data.Array
 > import RNACombinators
 
 

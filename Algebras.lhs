@@ -21,8 +21,8 @@
  
 > module Algebras where
 
-> import Array
-> import List
+> import Data.Array
+> import Data.List
 > import RNACombinators
 > import Foldingspace
 > import Energy

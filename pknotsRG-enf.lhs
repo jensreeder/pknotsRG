@@ -11,8 +11,8 @@ that contains at least one pseudoknot somewhere in the sequence
 
 > module Main where
 
-> import Array
-> import System(getArgs)
+> import Data.Array
+> import System.Environment(getArgs)
 > import Foldingspace
 > import RNACombinators
 > import Energy

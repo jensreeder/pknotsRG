@@ -10,8 +10,8 @@ This variant of pknotsRG computes the best length normalized pseudoknot.
 
 > module Main where
 
-> import Array
-> import System(getArgs)
+> import Data.Array
+> import System.Environment(getArgs)
 > import Foldingspace
 > import RNACombinators
 > import Energy
